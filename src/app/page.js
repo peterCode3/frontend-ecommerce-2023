@@ -8,6 +8,7 @@ import EventButton from '@/components/atoms/Button/EventButton'
 import AnchorTag from '@/components/atoms/AnchorTag/AnchorTag'
 import CheckBox from '@/components/atoms/CheckBox/CheckBox'
 import Container from '@/components/atoms/Container/container'
+import Icon from '@/components/atoms/Icon/Icon'
 export default function Home() {
   return (
     <div className='main'>
@@ -20,6 +21,7 @@ export default function Home() {
         <Span>Hello Man</Span>
         <EventButton>Hy</EventButton>
         <AnchorTag href="#">Hello Tag</AnchorTag>
+        <Icon>Hello</Icon>
       </Container>
     </div>
   )
