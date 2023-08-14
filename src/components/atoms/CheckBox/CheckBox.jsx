@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 
 const CheckBox = ({label, onchange, checked})=>{
-    const CheckBoxStyle = "text-scondary";
+    const CheckBoxStyle = "text-scondary mr-2";
+    const LabelStyle = " mr-1";
 
     return(
-        <label>
-            <input type="checkbox" onchange={onchange} checked={checked}/>
+        <label className={CheckBoxStyle}>
+            <input className={LabelStyle} type="checkbox" onchange={onchange} checked={checked}/>
             {label}
         </label>
     );
