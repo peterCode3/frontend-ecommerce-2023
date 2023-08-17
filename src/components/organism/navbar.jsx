@@ -1,35 +1,30 @@
-import Link from 'next/link';
+// import AnchorTag from 'next/AnchorTag';
+import AnchorTag from '../atoms/AnchorTag/AnchorTag';
 
 const Navbar = () => {
   // Define the inline styles
-  const navItemStyle = {
-    display: 'inline-block',
-    padding: '10px',
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    color: 'black',
-  };
+  const navItemStyle = 'inline-block p-4 md:font-bold no-underline text-black';
 
   return (
     <nav>
       <ul style={{ listStyle: 'none', padding: 0 }}>
-        <li style={navItemStyle}>
-          <Link href="/">Home</Link>
+        <li className={navItemStyle}>
+            <AnchorTag href='/'>Home</AnchorTag>
         </li>
-        <li style={navItemStyle}>
-          <Link href="/">About</Link>
+        <li className={navItemStyle}>
+          <AnchorTag href="/">About</AnchorTag>
         </li>
-        <li style={navItemStyle}>
-          <Link href="/">Category</Link>
+        <li className={navItemStyle}>
+          <AnchorTag href="/">Category</AnchorTag>
         </li>
-        <li style={navItemStyle}>
-          <Link href="/">Shop</Link>
+        <li className={navItemStyle}>
+          <AnchorTag href="/">Shop</AnchorTag>
         </li>
-        <li style={navItemStyle}>
-          <Link href="/">Blog</Link>
+        <li className={navItemStyle}>
+          <AnchorTag href="/">Blog</AnchorTag>
         </li>
-        <li style={navItemStyle}>
-          <Link href="/">Contact Us</Link>
+        <li className={navItemStyle}>
+          <AnchorTag href="/">Contact Us</AnchorTag>
         </li>
       </ul>
     </nav>

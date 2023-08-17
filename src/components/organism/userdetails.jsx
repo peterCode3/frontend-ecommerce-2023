@@ -1,74 +1,67 @@
-import React, { Component } from 'react';
-import "@/../globals.css"
+import React, { useState } from 'react';
+import "@/../globals.css";
 
+const UserDetails = () => {
+  const [activeTab, setActiveTab] = useState('Dashboard');
 
-
-class UserDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeTab: 'Dashboard'
-    };
-  }
-
-  handleTabChange = (Dashboard) => {
-    this.setState({ activeTab: Dashboard });
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
   };
 
-  render() {
-    const { activeTab } = this.state;
+  let listItemsStyle = "border text-xl border-gray-500 px-2 py-2 cursor-pointer"
 
-    return (
-      <div className="user-table">
-        <div className="tab-buttons w-3/12 shadow-slate-50	">
-          <button
-            onClick={() => this.handleTabChange('Dashboard')}
-            className={activeTab === 'Dashboard' ? 'text-left w-full active' : ''}
-          >
-            Dashboard
-          </button>
-          <button
-            onClick={() => this.handleTabChange('Orders')}
-            className={activeTab === 'Orders' ? 'text-left w-full active' : ''}
-          >
-            Orders
-          </button>
-          <button
-            onClick={() => this.handleTabChange('Downloads')}
-            className={activeTab === 'Downloads' ? 'text-left w-full active' : ''}
-          >
-            Downloads
-          </button>
-          <button
-            onClick={() => this.handleTabChange('Address')}
-            className={activeTab === 'Address' ? 'text-left w-full active' : ''}
-          >
-            Address
-          </button>
-          <button
-            onClick={() => this.handleTabChange('Accountdetails')}
-            className={activeTab === 'Accountdetails' ? 'text-left w-full active' : ''}
-          >
-            Account Details
-          </button>
-          <button
-            onClick={() => this.handleTabChange('Logout')}
-            className={activeTab === 'Logout' ? 'text-left w-full active' : ''}
-          >
-            Logout
-          </button>
-        </div>
-        <div className="user-content">
-          {activeTab === 'Dashboard' && <p>Content of Tab 1</p>}
-          {activeTab === 'Orders' && <p>Content of Tab 2</p>}
-          {activeTab === 'Downloads' && <p>Content of Tab 3</p>}
-          {activeTab === 'Address' && <p>Content of Tab 4</p>}
-          {activeTab === 'Accountdetails' && <p>Content of Tab 5</p>}
-          {activeTab === 'Logout' && <p>Content of Tab 6</p>}
-        </div>
+  return (
+    <div className="user-table flex py-4">
+      <div className="tab-buttons w-2/12 bg-white shadow-slate-50">
+        <ul>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Dashboard')}>
+            <button className={activeTab === 'Dashboard' ? 'active' : ''} >
+              Dashboard
+            </button>
+          </li>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Orders')}>
+            <button className={activeTab === 'Orders' ? 'active' : ''} >
+              Orders
+            </button>
+          </li>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Downloads')}>
+            <button className={activeTab === 'Downloads' ? 'active' : ''} >
+              Downloads
+            </button>
+          </li>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Address')}>
+            <button className={activeTab === 'Address' ? 'active' : ''} >
+              Address
+            </button>
+          </li>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Accountdetails')}>
+            <button className={activeTab === 'Accountdetails' ? 'active' : ''} >
+              Account Details
+            </button>
+          </li>
+          <li className={listItemsStyle}
+            onClick={() => handleTabChange('Logout')}>
+            <button className={activeTab === 'Logout' ? 'active' : ''} >
+              Logout
+            </button>
+          </li>
+        </ul>
       </div>
-    );
-  }
-}
+      <div className="user-content w-10/12 px-4 border-gray-500 border">
+        {activeTab === 'Dashboard' && <p>Content of Dashboard Tab</p>}
+        {activeTab === 'Orders' && <p>Content of Orders Tab</p>}
+        {activeTab === 'Downloads' && <p>Content of Downloads Tab</p>}
+        {activeTab === 'Address' && <p>Content of Address Tab</p>}
+        {activeTab === 'Accountdetails' && <p>Content of Account Details Tab</p>}
+        {activeTab === 'Logout' && <p>Content of Logout Tab</p>}
+      </div>
+    </div>
+  );
+};
 
 export default UserDetails;

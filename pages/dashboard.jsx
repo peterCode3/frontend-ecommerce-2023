@@ -3,9 +3,15 @@ import Dashboard from '@/components/template/Dashboard'
 
 
 export default function dashboard() {
-  return (
+    return (
     <div>
       <Dashboard />
     </div>
   )
 }
+
+
+// api/categories.js
+import axios from 'axios';
+
+

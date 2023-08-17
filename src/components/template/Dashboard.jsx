@@ -5,20 +5,15 @@ import Footer from '@/components/template/Footer'
 import UserDetails from '@/components/organism/userdetails'
 import Heading from '@/components/atoms/Heading/Heading'
 import Container from '@/components/atoms/Container/container'
-import Link from 'next/link';
+import AnchorTag from '../atoms/AnchorTag/AnchorTag';
+
 
 
 
 export default function dashboard() {
 
- const BreadcrumbStyle = {
-    display: 'inline-block',
-    padding: '10px',
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    color: 'black',
- }
-
+ const BreadcrumbStyle = 'inline-block p-4 md:font-bold no-underline text-black';
+    
 
   return (
     <div>
@@ -26,15 +21,17 @@ export default function dashboard() {
         <Container>
             <div className='breadcrumb'>
                 <ul>
-                  <li style={BreadcrumbStyle}>
-                    <Link href="/">Home</Link>
+                  <li className={BreadcrumbStyle}>
+                    <AnchorTag href="/">Home</AnchorTag>
                   </li> 
-                  <li style={BreadcrumbStyle}>
-                    <Link href="/">My Account</Link>
+                  <li className={BreadcrumbStyle}>
+                    <AnchorTag href="/">My Account</AnchorTag>
                   </li>
                 </ul>
             </div>
-            <Heading level="3" >My Account</Heading>
+            <div className='py-6'>
+                <Heading level="3" >My Account</Heading>
+            </div>
             <UserDetails />
         </Container>
       <Footer />
