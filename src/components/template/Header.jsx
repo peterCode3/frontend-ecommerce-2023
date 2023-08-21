@@ -15,6 +15,7 @@ const Header = () => {
             <div className='inr-header flex justify-self-center	justify-between items-center'>
                 <Logo logoData={logoData} />
                 <Navbar />
+                
             </div>
         </Container>
     </header>

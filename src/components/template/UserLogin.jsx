@@ -1,62 +1,92 @@
-// import React from 'react';
 import InputField from '@/../src/components/atoms/Input/Input';
 import Submit from '@/../src/components/atoms/Input/Input-Submit';
-import Label from '@/../src/components/atoms/Label/Label';
 import "@/../globals.css";
 import Container from '@/../src/components/atoms/Container/container';
-import { Formik, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import Label from '../atoms/Label/Label';
+import Header from './Header';
+import Footer from './Footer';
+
+// components/AdminLoginForm.js
+import React, { useState, useEffect } from 'react';
+import {useRouter} from 'next/router'
 import axios from 'axios';
 
-const AdminLoginPage = () => {
-  const initialValues = { email: '', password: '' };
+const AdminLoginForm = () => {
+  const [email, setEmail] = useState('');
+  const router = useRouter();
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const LoginSecStyle = 'mt-8 mb-8 w-4/12 ptr-login-form px-6 bg-gray-400 m-auto py-6 rounded border-2 border-yellow-600';
 
-  const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().required('Required'),
-  });
+  
+  useEffect(() => {
+    // Check if a valid token is stored in session storage
+    const token = sessionStorage.getItem('adminToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-  const handleSubmit = async (values) => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await axios.post('http://localhost:8000/admin', values);
+      const response = await axios.post('/api/admin-login', { email, password });
+      const { token } = response.data;
+
+      // Store the token securely in session storage
+      sessionStorage.setItem('adminToken', token);
+
+      console.log('Logged in with token:', token);
+      setIsLoggedIn(true);
+      router.push('/dashboard');
     } catch (error) {
-      // Handle login error
+      console.error('Login error:', error);
     }
   };
 
-  const LoginSecStyle = 'w-4/12 ptr-login-form px-6 bg-gray-400 m-auto py-6 rounded border-2 border-yellow-600';
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminToken'); 
+    setIsLoggedIn(false); 
+    router.push('/admin-login'); 
+  };
 
+  
   return (
-
-
-    <div>
-        <Container>
-            <div className='h-screen flex items-center'>
-                <div className={LoginSecStyle}>
-                    <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                          >
-                            <Form>
-                              <div>
-                                <Label>Email:</Label>
-                                <InputField type="email" name="email" />
-                                <ErrorMessage name="email" component="div" />
-                              </div>
-                              <div>
-                                <Label>Password:</Label>
-                                <InputField type="password" name="password" />
-                                <ErrorMessage name="password" component="div" />
-                              </div>
-                              <Submit type="submit">Login</Submit>
-                            </Form>
-                          </Formik>
-                </div>
-            </div>
-        </Container>
+    <div className='main-login'>
+    <Header isLoggedIn={isLoggedIn}/>
+    <Container>
+    {isLoggedIn ? (
+      <div>
+        <p>You are logged in.</p>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      ) : (
+      <div className={LoginSecStyle}>
+        <form onSubmit={handleSubmit}>
+          <Label htmlFor='email'>User Name</Label>
+          <InputField
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Label htmlFor='password'>User Pa ssword</Label>
+          <InputField
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Submit name='submit' type="submit">Login</Submit>
+        </form>
+      </div>
+      )}
+    </Container>
+    <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default AdminLoginPage;
+export default AdminLoginForm;

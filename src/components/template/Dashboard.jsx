@@ -6,11 +6,10 @@ import UserDetails from '@/components/organism/userdetails'
 import Heading from '@/components/atoms/Heading/Heading'
 import Container from '@/components/atoms/Container/container'
 import AnchorTag from '../atoms/AnchorTag/AnchorTag';
+import Auth from '../organism/auth'
 
 
-
-
-export default function dashboard() {
+function dashboard() {
 
  const BreadcrumbStyle = 'inline-block p-4 md:font-bold no-underline text-black';
     
@@ -38,3 +37,5 @@ export default function dashboard() {
     </div>
   )
 }
+
+export default Auth(dashboard)
